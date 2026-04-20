@@ -1,0 +1,87 @@
+
+> vibeora-pharmacy@0.1.0 build
+> next build
+
+⚠ Warning: Next.js inferred your workspace root, but it may not be correct.
+ We detected multiple lockfiles and selected the directory of C:\Users\SHAREEF\package-lock.json as the root directory.
+ To silence this warning, set `turbopack.root` in your Next.js config, or consider removing one of the lockfiles if it's not needed.
+   See https://nextjs.org/docs/app/api-reference/config/next-config-js/turbopack#root-directory for more information.
+ Detected additional lockfiles: 
+   * C:\Users\SHAREEF\Desktop\vibeora-pharmacy\package-lock.json
+
+▲ Next.js 16.2.3 (Turbopack)
+- Environments: .env.local
+
+⚠ The "middleware" file convention is deprecated. Please use "proxy" instead. Learn more: https://nextjs.org/docs/messages/middleware-to-proxy
+  Creating an optimized production build ...
+
+> Build error occurred
+Error: Turbopack build failed with 3 errors:
+./Desktop/vibeora-pharmacy/app/(public)/checkout/page.tsx:214:117
+Expected '</', got 'else'
+  [90m212 |[0m ...
+  [90m213 |[0m ...
+[31m[1m>[0m [90m214 |[0m ...& form.phone && form.address) setStep([35m2[0m) [36melse[0m alert([32m'Please fill in all required field..[0m.
+  [90m    |[0m                                             [31m[1m^^^^[0m
+  [90m215 |[0m ...[32meg, #0077B6, #00B4D8)'[0m, color:[32m'white'[0m, border:[32m'none'[0m, borderRadius:[32m'10px'[0m, padding:[32m'14...[0m
+  [90m216 |[0m ...
+  [90m217 |[0m ...
+
+Parsing ecmascript source code failed
+
+
+./Desktop/vibeora-pharmacy/app/(auth)/login/page.tsx:6:1
+Module not found: Can't resolve '@/lib/supabase'
+  [90m4 |[0m [36mimport[0m { useRouter } [36mfrom[0m [32m'next/navigation'[0m
+  [90m5 |[0m [36mimport[0m { [33mEye[0m, [33mEyeOff[0m, [33mMail[0m, [33mLock[0m, [33mArrowRight[0m, [33mShieldCheck[0m } [36mfrom[0m [32m'lucide-react'[0m
+[31m[1m>[0m [90m6 |[0m [36mimport[0m { supabase } [36mfrom[0m [32m'@/lib/supabase'[0m
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m7 |[0m
+  [90m8 |[0m [36mexport[0m [36mdefault[0m [36mfunction[0m [33mLoginPage[0m() {
+  [90m9 |[0m   [36mconst[0m router = useRouter()
+
+Import map: aliased to relative './lib/supabase' inside of [project]/Desktop/vibeora-pharmacy
+
+
+Import traces:
+  Client Component Browser:
+    ./Desktop/vibeora-pharmacy/app/(auth)/login/page.tsx [Client Component Browser]
+    ./Desktop/vibeora-pharmacy/app/(auth)/login/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./Desktop/vibeora-pharmacy/app/(auth)/login/page.tsx [Client Component SSR]
+    ./Desktop/vibeora-pharmacy/app/(auth)/login/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./Desktop/vibeora-pharmacy/app/(auth)/register/page.tsx:6:1
+Module not found: Can't resolve '@/lib/supabase'
+  [90m4 |[0m [36mimport[0m { useRouter } [36mfrom[0m [32m'next/navigation'[0m
+  [90m5 |[0m [36mimport[0m { [33mEye[0m, [33mEyeOff[0m, [33mMail[0m, [33mLock[0m, [33mUser[0m, [33mPhone[0m, [33mArrowRight[0m, [33mShieldCheck[0m, [33mCheckCircle[0m } [36mfrom[0m [32m...[0m
+[31m[1m>[0m [90m6 |[0m [36mimport[0m { supabase } [36mfrom[0m [32m'@/lib/supabase'[0m
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m7 |[0m
+  [90m8 |[0m [36mexport[0m [36mdefault[0m [36mfunction[0m [33mRegisterPage[0m() {
+  [90m9 |[0m   [36mconst[0m router = useRouter()
+
+Import map: aliased to relative './lib/supabase' inside of [project]/Desktop/vibeora-pharmacy
+
+
+Import traces:
+  Client Component Browser:
+    ./Desktop/vibeora-pharmacy/app/(auth)/register/page.tsx [Client Component Browser]
+    ./Desktop/vibeora-pharmacy/app/(auth)/register/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./Desktop/vibeora-pharmacy/app/(auth)/register/page.tsx [Client Component SSR]
+    ./Desktop/vibeora-pharmacy/app/(auth)/register/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+    at <unknown> (./Desktop/vibeora-pharmacy/app/(public)/checkout/page.tsx:214:117)
+    at <unknown> (./Desktop/vibeora-pharmacy/app/(auth)/login/page.tsx:6:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./Desktop/vibeora-pharmacy/app/(auth)/register/page.tsx:6:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)

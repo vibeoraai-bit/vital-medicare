@@ -1,0 +1,49 @@
+import { NextRequest, NextResponse } from 'next/server';
+import { createClient } from '@supabase/supabase-js';
+
+const AUTHORIZED_EMAIL = 'vitalmedicare.official@gmail.com';
+
+export async function middleware(request: NextRequest) {
+  const pathname = request.nextUrl.pathname;
+
+  // Protect the admin portal - return 404 for unauthorized access
+  if (pathname.startsWith('/v-manage-portal')) {
+    try {
+      // Get auth token from cookies
+      const token = request.cookies.get('sb-auth-token')?.value;
+      
+      if (!token) {
+        // No auth token - return 404
+        return new NextResponse('Not Found', { status: 404 });
+      }
+
+      // Verify token and check email
+      const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
+      const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
+      const supabase = createClient(supabaseUrl, supabaseKey);
+
+      const { data: { user }, error } = await supabase.auth.getUser(token);
+
+      if (error || !user) {
+        return new NextResponse('Not Found', { status: 404 });
+      }
+
+      if (user.email !== AUTHORIZED_EMAIL) {
+        // Unauthorized email - return 404 (stealth mode)
+        return new NextResponse('Not Found', { status: 404 });
+      }
+
+      // Authorized user - allow access
+      return NextResponse.next();
+    } catch (error) {
+      console.error('Middleware auth error:', error);
+      return new NextResponse('Not Found', { status: 404 });
+    }
+  }
+
+  return NextResponse.next();
+}
+
+export const config = {
+  matcher: ['/v-manage-portal/:path*'],
+};
