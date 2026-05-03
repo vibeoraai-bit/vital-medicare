@@ -131,7 +131,10 @@ export default function AdminDashboard() {
           </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
             <div style={{ position: 'relative', cursor: 'pointer' }}>
-              <Bell size={18} style={{ color: '#8896A7' }} />
+             <button onClick={() => alert('No new notifications')} style={{ background: 'none', border: 'none', cursor: 'pointer', position: 'relative' }}>
+  <Bell size={18} style={{ color: '#8896A7' }} />
+  <div style={{ position: 'absolute', top: '-3px', right: '-3px', width: '10px', height: '10px', borderRadius: '50%', background: '#EF233C', border: '2px solid #141C24' }} />
+</button>
               <div style={{ position: 'absolute', top: '-3px', right: '-3px', width: '10px', height: '10px', borderRadius: '50%', background: '#EF233C', border: '2px solid #141C24' }} />
             </div>
             <div style={{ color: '#8896A7', fontSize: '11px' }}>vitalmedicare.official@gmail.com</div>

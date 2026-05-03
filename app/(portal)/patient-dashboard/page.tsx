@@ -126,7 +126,11 @@ export default function PatientDashboard() {
           </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
             <div style={{ position: 'relative', cursor: 'pointer' }}>
-              <Bell size={19} style={{ color: '#8896A7' }} />
+              <div style={{ position: 'relative', cursor: 'pointer' }} onClick={() => alert('No new notifications')}>
+  <div style={{ position: 'relative', cursor: 'pointer' }} onClick={() => alert('No new notifications')}>
+  <Bell size={19} style={{ color: '#8896A7' }} />
+</div>
+</div>
             </div>
             <Link href="/shop" style={{ background: 'linear-gradient(135deg, #2d9cdb, #1a7ab8)', color: 'white', padding: '8px 18px', borderRadius: '8px', textDecoration: 'none', fontSize: '13px', fontWeight: 600, boxShadow: '0 0 12px rgba(45,156,219,0.25)' }}>
               + New Order

@@ -1,5 +1,6 @@
-/** @type {import('tailwindcss').Config} */
-module.exports = {
+import type { Config } from 'tailwindcss'
+
+const config: Config = {
   content: [
     './pages/**/*.{js,ts,jsx,tsx,mdx}',
     './components/**/*.{js,ts,jsx,tsx,mdx}',
@@ -8,23 +9,28 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: {
-          DEFAULT: '#2d9cdb',
-          light: '#1a7ab8',
-          bright: '#2d9cdb',
-        },
-        gold: {
-          DEFAULT: '#2d9cdb',
-          light: '#2d9cdb',
-        },
-        mint: 'rgba(45,156,219,0.1)',
-        dark: '#0A0F14',
+        bg: '#0A0F14',
+        card: '#141C24',
+        surface: '#0D1526',
+        primary: '#2d9cdb',
+        'primary-dark': '#1a7ab8',
+        accent: '#06D6A0',
+        gold: '#F4A261',
+        danger: '#EF233C',
+        vmtext: '#E0E6ED',
         muted: '#8896A7',
       },
       fontFamily: {
-        playfair: ['Playfair Display', 'serif'],
-        cormorant: ['Cormorant Garamond', 'serif'],
-        inter: ['Inter', 'sans-serif'],
+        sans: ['DM Sans', 'sans-serif'],
+        serif: ['Playfair Display', 'serif'],
+      },
+      screens: {
+        xs: '375px',
+        sm: '640px',
+        md: '768px',
+        lg: '1024px',
+        xl: '1280px',
+        '2xl': '1536px',
       },
     },
   },
