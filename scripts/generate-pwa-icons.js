@@ -1,6 +1,6 @@
-const fs = require('fs');
-const zlib = require('zlib');
-const path = require('path');
+import fs from 'fs';
+import zlib from 'zlib';
+import path from 'path';
 
 const crcTable = new Uint32Array(256);
 for (let n = 0; n < 256; n++) {
@@ -143,3 +143,4 @@ for (const asset of assets) {
   fs.writeFileSync(path.resolve(process.cwd(), asset.name), data);
   console.log(`wrote ${asset.name} (${data.length} bytes)`);
 }
+

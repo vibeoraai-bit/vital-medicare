@@ -1,158 +1,19 @@
 // ============================================
-// EDUPRIME ENTERPRISE — UTILITIES & READ MORE
+// UTILS - Used Functions Only
 // ============================================
 
-// ============================================
-// READ MORE TOGGLE
-// ============================================
-function initReadMore() {
-  const CHAR_LIMIT = 150;
-  document.querySelectorAll('[data-read-more]').forEach(container => {
-    const fullText = container.getAttribute('data-full-text') || container.textContent.trim();
-    if (fullText.length <= CHAR_LIMIT) return;
-
-    const preview = fullText.substring(0, CHAR_LIMIT) + '...';
-    let expanded = false;
-
-    const textEl = document.createElement('span');
-    textEl.textContent = preview;
-    textEl.className = 'read-more-text';
-
-    const btn = document.createElement('button');
-    btn.textContent = 'Read More';
-    btn.className = 'read-more-btn seal-press';
-    btn.style.cssText = `
-      background: none;
-      border: none;
-      color: #C6A43F;
-      font-weight: 700;
-      font-size: 0.85rem;
-      cursor: pointer;
-      padding: 0;
-      margin-left: 6px;
-      font-family: inherit;
-      text-decoration: underline;
-    `;
-
-    btn.addEventListener('click', function () {
-      expanded = !expanded;
-      textEl.textContent = expanded ? fullText : preview;
-      btn.textContent = expanded ? 'Read Less' : 'Read More';
-    });
-
-    container.innerHTML = '';
-    container.appendChild(textEl);
-    container.appendChild(btn);
-  });
+// FORMAT CURRENCY
+export function formatNaira(amount) {
+  return '₦' + Number(amount).toLocaleString('en-NG', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 }
 
-// ============================================
-// SCROLL REVEAL OBSERVER
-// ============================================
-function initScrollReveal() {
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-        observer.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-
-  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+// FORMAT DATE
+export function formatDate(dateStr) {
+  return new Date(dateStr).toLocaleDateString('en-NG', { day: 'numeric', month: 'long', year: 'numeric' });
 }
 
-// ============================================
-// MODAL SYSTEM
-// ============================================
-function openModal(modalId) {
-  const modal = document.getElementById(modalId);
-  if (!modal) return;
-  modal.style.display = 'flex';
-  modal.querySelector('.modal-content').classList.remove('paper-glide-out');
-  modal.querySelector('.modal-content').classList.add('paper-glide');
-  document.body.style.overflow = 'hidden';
-}
-
-function closeModal(modalId) {
-  const modal = document.getElementById(modalId);
-  if (!modal) return;
-  const content = modal.querySelector('.modal-content');
-  content.classList.remove('paper-glide');
-  content.classList.add('paper-glide-out');
-  setTimeout(() => {
-    modal.style.display = 'none';
-    document.body.style.overflow = '';
-  }, 350);
-}
-
-// Close modal on overlay click
-document.addEventListener('click', function (e) {
-  if (e.target.classList.contains('modal-overlay')) {
-    const modal = e.target.closest('[id]');
-    if (modal) closeModal(modal.id);
-  }
-});
-
-// Close modal on Escape key
-document.addEventListener('keydown', function (e) {
-  if (e.key === 'Escape') {
-    document.querySelectorAll('.modal-overlay').forEach(m => {
-      if (m.style.display !== 'none') closeModal(m.id);
-    });
-  }
-});
-
-// ============================================
-// ACTIVE NAV LINK
-// ============================================
-function initActiveNav() {
-  const currentPath = window.location.pathname;
-  document.querySelectorAll('.nav-link').forEach(link => {
-    const href = link.getAttribute('href');
-    if (href && (currentPath === href || currentPath.startsWith(href + '/'))) {
-      link.classList.add('nav-active', 'ink-draw-active');
-    }
-  });
-}
-
-// ============================================
-// MOBILE HAMBURGER MENU
-// ============================================
-function initMobileMenu() {
-  const toggle = document.getElementById('menu-toggle');
-  const menu = document.getElementById('mobile-menu');
-  const overlay = document.getElementById('menu-overlay');
-  if (!toggle || !menu) return;
-
-  toggle.addEventListener('click', function () {
-    const isOpen = menu.classList.contains('menu-open');
-    menu.classList.toggle('menu-open');
-    overlay?.classList.toggle('active');
-    toggle.innerHTML = isOpen ? menuIcon() : closeIcon();
-    document.body.style.overflow = isOpen ? '' : 'hidden';
-  });
-
-  overlay?.addEventListener('click', function () {
-    menu.classList.remove('menu-open');
-    overlay.classList.remove('active');
-    toggle.innerHTML = menuIcon();
-    document.body.style.overflow = '';
-  });
-}
-
-function menuIcon() {
-  return `<svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>`;
-}
-
-function closeIcon() {
-  return `<svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>`;
-}
-
-// ============================================
-// TOAST NOTIFICATIONS
-// ============================================
-function showToast(message, type = 'success', duration = 4000) {
+// TOAST NOTIFICATION
+export function showToast(message, type = 'success', duration = 4000) {
   const colors = {
     success: { bg: '#0E9F6E', icon: '✓' },
     error: { bg: '#DC2626', icon: '✕' },
@@ -190,42 +51,51 @@ function showToast(message, type = 'success', duration = 4000) {
   }, duration);
 }
 
-// ============================================
-// FORMAT CURRENCY
-// ============================================
-function formatNaira(amount) {
-  return '₦' + Number(amount).toLocaleString('en-NG', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+// ACTIVE NAV LINK
+export function initActiveNav() {
+  const currentPath = window.location.pathname;
+  document.querySelectorAll('.nav-link').forEach(link => {
+    const href = link.getAttribute('href');
+    if (href && (currentPath === href || currentPath.startsWith(href + '/'))) {
+      link.classList.add('nav-active', 'ink-draw-active');
+    }
+  });
 }
 
-// ============================================
-// FORMAT DATE
-// ============================================
-function formatDate(dateStr) {
-  return new Date(dateStr).toLocaleDateString('en-NG', { day: 'numeric', month: 'long', year: 'numeric' });
+// MOBILE HAMBURGER MENU
+export function initMobileMenu() {
+  const toggle = document.getElementById('menu-toggle');
+  const menu = document.getElementById('mobile-menu');
+  const overlay = document.getElementById('menu-overlay');
+  if (!toggle || !menu) return;
+
+  toggle.addEventListener('click', function () {
+    const isOpen = menu.classList.contains('menu-open');
+    menu.classList.toggle('menu-open');
+    overlay?.classList.toggle('active');
+    toggle.innerHTML = isOpen ? menuIcon() : closeIcon();
+    document.body.style.overflow = isOpen ? '' : 'hidden';
+  });
+
+  overlay?.addEventListener('click', function () {
+    menu.classList.remove('menu-open');
+    overlay.classList.remove('active');
+    toggle.innerHTML = menuIcon();
+    document.body.style.overflow = '';
+  });
 }
 
-// ============================================
-// SUPABASE CLIENT HELPER
-// ============================================
-const SUPABASE_URL = 'YOUR_SUPABASE_URL';
-const SUPABASE_ANON_KEY = 'YOUR_SUPABASE_ANON_KEY';
-
-// Include supabase-js via CDN in your HTML:
-// <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-let supabaseClient;
-function getSupabase() {
-  if (!supabaseClient) {
-    supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-  }
-  return supabaseClient;
+function menuIcon() {
+  return `<svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>`;
 }
 
-// ============================================
+function closeIcon() {
+  return `<svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>`;
+}
+
 // INIT ALL ON DOM READY
-// ============================================
 document.addEventListener('DOMContentLoaded', function () {
-  initReadMore();
-  initScrollReveal();
   initActiveNav();
   initMobileMenu();
 });
+
